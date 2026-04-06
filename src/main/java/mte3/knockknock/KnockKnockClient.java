@@ -21,16 +21,29 @@ public class KnockKnockClient {
         System.out.println("Recived: " + line );
 
     } // sendAndReceive() method closed
-    
+    public static String receive( Scanner scanner ){
+        try{
+            return scanner.nextLine();
+        }
+        finally{ return ""; }
+    }
 
     public static void joke(String who,String punchLine) throws IOException {
-        
-        sendAndReceive(null, "Knock, knock", null);
+        try (Socket connection = new Socket("localhost", PORT )) {
+            PrintWriter out = new PrintWriter( connection.getOutputStream() );
+            Scanner in = new Scanner( connection.getInputStream() );
 
-        sendAndReceive(null, punchLine, null);
-        //  
-        // 
-        // 
+            sendAndReceive(out, "Knock, knock", in);
+
+            sendAndReceive(out, who, in);
+
+            sendAndReceive(out, punchLine, in);
+
+            System.out.println("Recived: " + receive(in) );
+            
+            in.close();
+            out.close();
+        } 
 
     } // joke() method closed
 
