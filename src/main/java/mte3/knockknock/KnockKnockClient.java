@@ -14,16 +14,20 @@ public class KnockKnockClient {
     public static String SERVER = "localhost";
 
     public static void sendAndReceive(PrintWriter writer, String message, Scanner scanner) {
-        
-        // 
-        // 
-        // 
+        writer.println(message);
+        writer.flush();
+        System.out.println("Sent:" + message );
+        String line = scanner.nextLine();
+        System.out.println("Recived: " + line );
 
     } // sendAndReceive() method closed
     
 
     public static void joke(String who,String punchLine) throws IOException {
         
+        sendAndReceive(null, "Knock, knock", null);
+
+        sendAndReceive(null, punchLine, null);
         //  
         // 
         // 
