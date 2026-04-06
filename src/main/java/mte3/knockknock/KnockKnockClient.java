@@ -21,12 +21,7 @@ public class KnockKnockClient {
         System.out.println("Recived: " + line );
 
     } // sendAndReceive() method closed
-    public static String receive( Scanner scanner ){
-        try{
-            return scanner.nextLine();
-        }
-        finally{ return ""; }
-    }
+
 
     public static void joke(String who,String punchLine) throws IOException {
         try (Socket connection = new Socket("localhost", PORT )) {
@@ -38,8 +33,6 @@ public class KnockKnockClient {
             sendAndReceive(out, who, in);
 
             sendAndReceive(out, punchLine, in);
-
-            System.out.println("Recived: " + receive(in) );
             
             in.close();
             out.close();
